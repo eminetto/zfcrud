@@ -1,0 +1,59 @@
+README
+======
+
+Exemplo de aplicação CRUD usando o Zend Framework
+
+Estrutura do projeto:
+.htaccess - arquivo com as configurações de redirect necessárias para o projeto
+config/production.ini - arquivo com as configurações do projeto como cache, banco de dados, traduções, etc - ambiente de produção
+config/development.ini - arquivo com as configurações do projeto como cache, banco de dados, traduções, etc  - ambiente de desenvolvimento
+controllers/ - diretório para os controladores do projeto
+data/cache - diretório para salvar cache em arquivos
+doc - documentações do projeto
+forms - diretório para os formulários do projeto, criados com Zend_Form
+index.php - bootstrap do projeto. É necessário configurar ao menos os caminhos dos diretórios, nas linhas 33 a 40
+models - modelos do projeto
+views/layouts - layouts do projeto
+views/scripts/ - diretórios para as visões usadas pelos controladores
+public/css/ - arquivos css
+public/js/ - arquivos js
+public/img/ - imagens
+
+
+VHOST
+=====================
+
+Uma forma fácil de se trabalhar com projetos é configurar um VHOST em seu Apache. No arquivo de configuração faça como no exemplo:
+
+NameVirtualHost *
+
+<VirtualHost *:80>
+	DocumentRoot "/Applications/MAMP/htdocs/zfcrud"
+	
+	ServerName zf.local
+	
+	SetEnv APPLICATION_ENV "development"	
+	SetEnv CLASS_PATH "/Applications/MAMP/htdocs/library/"
+	SetEnv BASE_URL ""	
+	SetEnv HTTP_URL "http://zf.local"	
+	SetEnv BAR "/"	
+	
+	<Directory "/Applications/MAMP/htdocs/zfcrud">
+		Options Indexes MultiViews FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
+</VirtualHost>
+
+Database
+======================
+Para este exemplo eu criei a database zfcrud com a tabela tasks:
+create database zfcrud;
+use zfcrud;
+CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task` varchar(255) NOT NULL DEFAULT '',
+  `notes` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

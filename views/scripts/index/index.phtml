@@ -1,0 +1,24 @@
+<?php //var_dump($this->data); ?>
+<?php
+    echo $this->headScript()
+		->appendFile('/public/js/jquery-1.3.min.js')
+		->appendFile('/public/js/json2.js')
+		->appendFile('/public/js/jquery.zend.jsonrpc.js');
+?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var testClient = jQuery.Zend.jsonrpc({
+			url : '<?php echo $this->serverUrl; ?>'
+		});
+		console.log(testClient);
+		var data1 = testClient.TimelineService.loadPublicFeed(20,0);
+		if ('' != data1) {
+			$('#result1').html(data1);
+		}
+	});
+</script>
+</head>
+<body>
+	<div id="result1"></div>
+</body>
+</html>
